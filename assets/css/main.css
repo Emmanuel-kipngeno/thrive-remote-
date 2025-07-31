@@ -1162,7 +1162,7 @@ section,
 }
 
 .section-title h2 {
-  font-size: 32px;
+  font-size: 52px;
   font-weight: 700;
   margin-bottom: 20px;
   padding-bottom: 20px;
@@ -1173,7 +1173,7 @@ section,
   content: "";
   position: absolute;
   display: block;
-  width: 160px;
+  width: 220px;
   height: 1px;
   background: color-mix(in srgb, var(--default-color), transparent 60%);
   left: 0;
@@ -1186,7 +1186,7 @@ section,
   content: "";
   position: absolute;
   display: block;
-  width: 60px;
+  width: 220px;
   height: 3px;
   background: var(--accent-color);
   left: 0;
@@ -1464,7 +1464,7 @@ section,
 }
 
 .about .content h2 {
-  font-size: 2.5rem;
+  font-size: 3.5rem;
   font-weight: 700;
   margin-bottom: 1.5rem;
   line-height: 1.2;
@@ -1728,7 +1728,7 @@ section,
 }
 
 .featured-services .services-content h2 {
-  font-size: 42px;
+  font-size: 52px;
   font-weight: 600;
   line-height: 1.2;
   margin-bottom: 20px;
@@ -1736,7 +1736,7 @@ section,
 
 @media (max-width: 992px) {
   .featured-services .services-content h2 {
-    font-size: 32px;
+    font-size: 52px;
   }
 }
 
