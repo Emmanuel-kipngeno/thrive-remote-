@@ -883,7 +883,10 @@ h6 {
 --------------------------------------------------------------*/
 .footer {
   color: var(--default-color);
-  background-color: var(--background-color);
+footer.footer {
+  background-color: #0b3464; /* Replace with any color you want */
+  color: white; /* Optional: makes text visible on dark backgrounds */
+}
   font-size: 14px;
   padding-bottom: 50px;
   position: relative;
