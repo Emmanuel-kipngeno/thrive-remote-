@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apply | Thrive Remote</title>
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
+  <style>
+    body {
+      background: #f8f9fa;
+    }
+    .apply-container {
+      max-width: 700px;
+      margin: 60px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .btn-thrive {
+      background-color: #0d6efd;
+      border: none;
+    }
+    .btn-thrive:hover {
+      background-color: #084298;
+    }
+    #formResponse.success {
+      color: green;
+    }
+    #formResponse.error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Application Form -->
+  <div class="apply-container">
+    <h2 class="text-center mb-4">Job Application</h2>
+    <p class="text-center text-muted">Fill out the form below to apply for a position with Thrive Remote.</p>
+
+    <form id="applicationForm" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label for="name" class="form-label">Full Name</label>
+        <input type="text" class="form-control" id="name" name="name" required>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email Address</label>
+        <input type="email" class="form-control" id="email" name="email" required>
+      </div>
+      <div class="mb-3">
+        <label for="jobTitle" class="form-label">Job Applying For</label>
+        <select class="form-control" id="jobTitle" name="jobTitle" required>
+          <option value="">-- Select a Job --</option>
+          <option value="Data Scientist">Data Scientist</option>
+          <option value="Virtual Assistant">Virtual Assistant</option>
+          <option value="Web Developer">Web Developer</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="resume" class="form-label">Upload Resume (PDF/DOC)</label>
+        <input type="file" class="form-control" id="resume" name="resume" accept=".pdf,.doc,.docx" required>
+      </div>
+      <div class="mb-3">
+        <label for="message" class="form-label">Why should we hire you?</label>
+        <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-thrive w-100">Submit Application</button>
+    </form>
+
+    <p id="formResponse" class="mt-3 text-center fw-bold"></p>
+  </div>
+
+<script>
+  document.getElementById("applicationForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    let formData = new FormData(this);
+    let formResponse = document.getElementById("formResponse");
+
+    // 🔹 Auto-detect API base URL
+    const baseUrl = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+      ? "http://localhost:3000"
+      : "https://www.thrive-remote.com";
+
+    try {
+      let response = await fetch(`${baseUrl}/apply`, {
+        method: "POST",
+        body: formData
+      });
+
+      if (!response.ok) {
+        throw new Error("Server error");
+      }
+
+      let result = await response.json();
+
+      // ✅ Show success message
+      formResponse.innerText = result.message || "✅ Your application has been submitted successfully!";
+      formResponse.className = "success";
+
+      // Reset form after success
+      this.reset();
+    } catch (err) {
+      // ❌ Show error message
+      formResponse.innerText = "❌ Could not submit application. Please try again.";
+      formResponse.className = "error";
+    }
+  });
+</script>
+
+</body>
+</html>
