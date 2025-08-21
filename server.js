@@ -1,7 +1,7 @@
-const express = require("express"); 
+const express = require("express");
 const nodemailer = require("nodemailer");
 const bodyParser = require("body-parser");
-const multer = require("multer"); // for file uploads
+const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
 const fs = require("fs");
@@ -34,14 +34,13 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // ===== Email configuration =====
-// ⚠️ Best practice: put credentials in .env instead of hardcoding
 const transporter = nodemailer.createTransport({
   host: "mx4125.usc1.mymailhosting.com", // your SMTP server
   port: 587,
   secure: false,
   auth: {
     user: "admin@thrive-remote.com",
-    pass: "jeJxf@Y9GtrSChN", // replace with env variable
+    pass: "jeJxf@Y9GtrSChN", // ⚠️ use env variable in production
   },
 });
 
@@ -62,7 +61,7 @@ app.post("/send", (req, res) => {
   const { name, email, subject, message } = req.body;
 
   if (!name || !email || !message || !email.includes("@")) {
-    return res.status(400).send("Please complete the form and provide a valid email.");
+    return res.status(400).json({ message: "Please complete the form and provide a valid email." });
   }
 
   const mailOptions = {
@@ -75,10 +74,10 @@ app.post("/send", (req, res) => {
 
   transporter.sendMail(mailOptions, (error) => {
     if (error) {
-      console.error(error);
-      return res.status(500).send("Oops! Something went wrong and we couldn’t send your message.");
+      console.error("Contact form error:", error);
+      return res.status(500).json({ message: "Oops! Something went wrong and we couldn’t send your message." });
     }
-    res.status(200).send("Thank you! Your message has been sent.");
+    res.json({ message: "✅ Thank you! Your message has been sent." });
   });
 });
 
@@ -107,10 +106,10 @@ app.post("/apply", upload.single("resume"), (req, res) => {
 
   transporter.sendMail(mailOptions, (error) => {
     if (error) {
-      console.error("Email error:", error);
+      console.error("Application error:", error);
       return res.status(500).json({ message: "Error sending application. Please try again later." });
     }
-    res.json({ message: "Your application has been submitted successfully!" });
+    res.json({ message: "✅ Your application has been submitted successfully!" });
   });
 });
 

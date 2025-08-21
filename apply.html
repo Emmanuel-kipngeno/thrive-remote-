@@ -79,10 +79,13 @@
     let formData = new FormData(this);
     let formResponse = document.getElementById("formResponse");
 
-    // 🔹 Auto-detect API base URL
-    const baseUrl = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
-      ? "http://localhost:3000"
-      : "https://www.thrive-remote.com";
+    // Auto-detect base URL (localhost vs production)
+    let baseUrl;
+    if (["localhost", "127.0.0.1"].includes(window.location.hostname)) {
+      baseUrl = "http://localhost:3000";
+    } else {
+      baseUrl = "https://www.thrive-remote.com";
+    }
 
     try {
       let response = await fetch(`${baseUrl}/apply`, {
@@ -90,25 +93,27 @@
         body: formData
       });
 
-      if (!response.ok) {
-        throw new Error("Server error");
-      }
-
       let result = await response.json();
 
-      // ✅ Show success message
-      formResponse.innerText = result.message || "✅ Your application has been submitted successfully!";
-      formResponse.className = "success";
+      if (!response.ok) {
+        throw new Error(result.message || "Server error");
+      }
 
-      // Reset form after success
+      // ✅ Show success
+      formResponse.innerText = result.message || "✅ Your application has been submitted successfully!";
+      formResponse.classList.remove("error");
+      formResponse.classList.add("success", "mt-3", "text-center", "fw-bold");
+
       this.reset();
     } catch (err) {
-      // ❌ Show error message
+      console.error("Form submit error:", err); // 👈 real error in console
       formResponse.innerText = "❌ Could not submit application. Please try again.";
-      formResponse.className = "error";
+      formResponse.classList.remove("success");
+      formResponse.classList.add("error", "mt-3", "text-center", "fw-bold");
     }
   });
 </script>
+
 
 </body>
 </html>
