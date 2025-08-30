@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Careers | Thrive Remote</title>
+
+  <!-- Bootstrap + your site styles -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="assets/css/style.css" rel="stylesheet" />
+
+  <!-- Meta -->
+  <meta name="description" content="Join Thrive Remote. Explore openings for Virtual Assistant, Data Scientist, and Web Developer. Remote-first, flexible work, and growth opportunities." />
+
+  <style>
+    /* Light, modern tweaks that sit on top of your site styles */
+    :root {
+      --tr-primary: #0d6efd;      /* matches your .btn-thrive */
+      --tr-dark: #0b1220;
+    }
+
+    .careers-hero {
+      background: radial-gradient(1200px 600px at 10% 0%, rgba(13,110,253,.10), transparent),
+                  radial-gradient(1000px 500px at 90% 20%, rgba(13,110,253,.07), transparent),
+                  #f8f9fa;
+      padding: 72px 0 48px;
+      border-bottom: 1px solid rgba(0,0,0,.06);
+    }
+    .careers-hero h1 {
+      font-weight: 700;
+      letter-spacing: .2px;
+    }
+    .careers-hero p.lead {
+      color: #4b5563;
+      max-width: 760px;
+    }
+
+    .filters-card {
+      margin-top: -28px;
+      border-radius: 16px;
+      box-shadow: 0 10px 24px rgba(0,0,0,.06);
+      border: 1px solid rgba(0,0,0,.06);
+      background: #fff;
+    }
+
+    .job-card {
+      border: 1px solid rgba(0,0,0,.06);
+      border-radius: 16px;
+      padding: 20px;
+      transition: box-shadow .2s ease, transform .08s ease;
+      background: #fff;
+    }
+    .job-card:hover {
+      box-shadow: 0 10px 24px rgba(0,0,0,.08);
+      transform: translateY(-1px);
+    }
+    .badge-soft {
+      background: rgba(13,110,253,.1);
+      color: var(--tr-primary);
+      border: 1px solid rgba(13,110,253,.25);
+    }
+    .accordion-button:not(.collapsed) {
+      background: rgba(13,110,253,.05);
+      color: var(--tr-dark);
+    }
+
+    .btn-thrive {
+      background-color: var(--tr-primary);
+      border: none;
+    }
+    .btn-thrive:hover {
+      background-color: #084298;
+    }
+
+    .empty-state {
+      display: none;
+      color: #6b7280;
+    }
+  </style>
+
+  <!-- Simple JSON-LD (JobPosting) for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Thrive Remote",
+    "url": "https://www.thrive-remote.com",
+    "brand": "Thrive Remote",
+    "sameAs": ["https://www.thrive-remote.com/careers"]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="careers-hero">
+    <div class="container">
+      <h1 class="display-5 mb-3">Build your next chapter with Thrive Remote</h1>
+      <p class="lead mb-0">
+        We’re a remote-first team helping clients ship faster and smarter. Explore open roles across operations and engineering—flexible work, meaningful impact, great people.
+      </p>
+    </div>
+  </section>
+
+  <!-- FILTERS -->
+  <div class="container">
+    <div class="filters-card p-3 p-md-4">
+      <form id="filters" class="row g-3 align-items-end">
+        <div class="col-md-4">
+          <label class="form-label">Search</label>
+          <input id="search" type="text" class="form-control" placeholder="Title, keywords…" />
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Department</label>
+          <select id="department" class="form-select">
+            <option value="">All</option>
+            <option value="Operations">Operations</option>
+            <option value="Data">Data</option>
+            <option value="Engineering">Engineering</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Type</label>
+          <select id="type" class="form-select">
+            <option value="">Any</option>
+            <option value="Full-time">Full-time</option>
+            <option value="Part-time">Part-time</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <button type="button" id="clear" class="btn btn-outline-secondary w-100">Clear</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- JOBS LIST -->
+  <section class="py-5">
+    <div class="container">
+      <div id="jobsList" class="vstack gap-3">
+
+        <!-- Virtual Assistant -->
+        <article class="job-card" 
+                 data-title="Virtual Assistant"
+                 data-dept="Operations"
+                 data-type="Full-time,Part-time"
+                 data-location="Remote">
+          <div class="d-flex flex-column flex-md-row justify-content-between gap-2">
+            <div>
+              <h3 class="h5 mb-1">Virtual Assistant</h3>
+              <div class="small text-muted">
+                <span class="me-2">Location: Remote</span>
+                <span class="me-2">Type: Full-time / Part-time</span>
+                <span>Dept: Operations</span>
+              </div>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+              <span class="badge rounded-pill badge-soft">Remote</span>
+              <a class="btn btn-sm btn-light border" data-bs-toggle="collapse" href="#jd-va" role="button" aria-expanded="false" aria-controls="jd-va">View details</a>
+              <a class="btn btn-sm btn-thrive" href="apply.html?jobTitle=Virtual%20Assistant">Apply</a>
+            </div>
+          </div>
+
+          <div class="collapse mt-3" id="jd-va">
+            <div class="accordion" id="acc-va">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="va-about-h">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#va-about" aria-expanded="true">About the Role</button>
+                </h2>
+                <div id="va-about" class="accordion-collapse collapse show" data-bs-parent="#acc-va">
+                  <div class="accordion-body">
+                    We’re seeking a proactive, detail-oriented Virtual Assistant to support admin, operations, and customer tasks. You’ll manage calendars, communications, documents, and light marketing while working independently and professionally.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="va-resp-h">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#va-resp">Key Responsibilities</button>
+                </h2>
+                <div id="va-resp" class="accordion-collapse collapse" data-bs-parent="#acc-va">
+                  <div class="accordion-body">
+                    <ul class="mb-0">
+                      <li>Manage calendars, schedule meetings, coordinate appointments.</li>
+                      <li>Handle email, draft responses, organize inboxes.</li>
+                      <li>Research online; compile reports and data.</li>
+                      <li>Assist with CRM, data entry, and records accuracy.</li>
+                      <li>Prepare/edit docs, presentations, and reports.</li>
+                      <li>Support social scheduling and basic marketing tasks.</li>
+                      <li>Customer support via email/chat/phone as needed.</li>
+                      <li>Book travel, process expenses, manage purchases.</li>
+                      <li>Other administrative tasks as required.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="va-qual-h">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#va-qual">Qualifications & Skills</button>
+                </h2>
+                <div id="va-qual" class="accordion-collapse collapse" data-bs-parent="#acc-va">
+                  <div class="accordion-body">
+                    <ul class="mb-2">
+                      <li>Experience as a Virtual Assistant or similar role.</li>
+                      <li>Excellent written and verbal communication.</li>
+                      <li>Strong organization and time management.</li>
+                      <li>Google Workspace, MS Office, and tools like Trello/Asana/ClickUp.</li>
+                      <li>CRM familiarity; social/content a plus.</li>
+                      <li>Professionalism, discretion, and independence.</li>
+                    </ul>
+                    <strong>Preferred:</strong> Executive support, Canva/Mailchimp/Buffer, problem-solving in fast-paced teams.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="va-offer-h">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#va-offer">What We Offer</button>
+                </h2>
+                <div id="va-offer" class="accordion-collapse collapse" data-bs-parent="#acc-va">
+                  <div class="accordion-body">
+                    Remote flexibility, growth and skill development, supportive team culture, and competitive hourly compensation.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Data Scientist -->
+        <article class="job-card" 
+                 data-title="Data Scientist"
+                 data-dept="Data"
+                 data-type="Full-time,Part-time"
+                 data-location="Remote">
+          <div class="d-flex flex-column flex-md-row justify-content-between gap-2">
+            <div>
+              <h3 class="h5 mb-1">Data Scientist</h3>
+              <div class="small text-muted">
+                <span class="me-2">Location: Remote</span>
+                <span class="me-2">Type: Full-time / Part-time</span>
+                <span>Dept: Data</span>
+              </div>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+              <span class="badge rounded-pill badge-soft">Remote</span>
+              <a class="btn btn-sm btn-light border" data-bs-toggle="collapse" href="#jd-ds">View details</a>
+              <a class="btn btn-sm btn-thrive" href="apply.html?jobTitle=Data%20Scientist">Apply</a>
+            </div>
+          </div>
+
+          <div class="collapse mt-3" id="jd-ds">
+            <div class="accordion" id="acc-ds">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#ds-about">About the Role</button>
+                </h2>
+                <div id="ds-about" class="accordion-collapse collapse show" data-bs-parent="#acc-ds">
+                  <div class="accordion-body">
+                    Turn raw data into insights and models that drive decisions. Work with large datasets, build predictive systems, and communicate clearly with technical and non-technical partners.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ds-resp">Key Responsibilities</button>
+                </h2>
+                <div id="ds-resp" class="accordion-collapse collapse" data-bs-parent="#acc-ds">
+                  <div class="accordion-body">
+                    <ul class="mb-0">
+                      <li>Collect, clean, and preprocess structured/unstructured data.</li>
+                      <li>Develop, test, and deploy statistical and ML models.</li>
+                      <li>Apply ML to improve products and experiences.</li>
+                      <li>EDA to find trends, patterns, anomalies.</li>
+                      <li>Build dashboards/visualizations; translate insights.</li>
+                      <li>Partner with product, eng, marketing, and business.</li>
+                      <li>Research new tools and methods.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ds-qual">Qualifications & Skills</button>
+                </h2>
+                <div id="ds-qual" class="accordion-collapse collapse" data-bs-parent="#acc-ds">
+                  <div class="accordion-body">
+                    <ul class="mb-2">
+                      <li>Bachelor’s in DS/CS/Stats/Math or related.</li>
+                      <li>Experience in DS/Analytics; Python or R.</li>
+                      <li>ML libs: scikit-learn, TensorFlow, or PyTorch.</li>
+                      <li>Strong stats, probability, hypothesis testing.</li>
+                      <li>SQL; relational/non-relational DBs.</li>
+                      <li>Visualization (Tableau/Power BI/etc.).</li>
+                      <li>Clear communication to non-technical audiences.</li>
+                    </ul>
+                    <strong>Preferred:</strong> Hadoop/Spark/Databricks; AWS/Azure/GCP; model deployment; strong business sense.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ds-offer">What We Offer</button>
+                </h2>
+                <div id="ds-offer" class="accordion-collapse collapse" data-bs-parent="#acc-ds">
+                  <div class="accordion-body">
+                    Hourly pay, multi-client exposure, training/certifications, collaborative environment, flexible remote work.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Web Developer -->
+        <article class="job-card" 
+                 data-title="Web Developer"
+                 data-dept="Engineering"
+                 data-type="Full-time"
+                 data-location="Remote,Hybrid,On-site">
+          <div class="d-flex flex-column flex-md-row justify-content-between gap-2">
+            <div>
+              <h3 class="h5 mb-1">Web Developer</h3>
+              <div class="small text-muted">
+                <span class="me-2">Location: Remote / Hybrid / On-site</span>
+                <span class="me-2">Type: Full-time</span>
+                <span>Dept: Engineering</span>
+              </div>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+              <span class="badge rounded-pill badge-soft">Remote-friendly</span>
+              <a class="btn btn-sm btn-light border" data-bs-toggle="collapse" href="#jd-web">View details</a>
+              <a class="btn btn-sm btn-thrive" href="apply.html?jobTitle=Web%20Developer">Apply</a>
+            </div>
+          </div>
+
+          <div class="collapse mt-3" id="jd-web">
+            <div class="accordion" id="acc-web">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#web-about">About the Role</button>
+                </h2>
+                <div id="web-about" class="accordion-collapse collapse show" data-bs-parent="#acc-web">
+                  <div class="accordion-body">
+                    Design, build, and maintain responsive, high-performing sites and apps. Work with design and product to deliver accessible, scalable experiences.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#web-resp">Key Responsibilities</button>
+                </h2>
+                <div id="web-resp" class="accordion-collapse collapse" data-bs-parent="#acc-web">
+                  <div class="accordion-body">
+                    <ul class="mb-0">
+                      <li>Develop, test, and deploy responsive web apps.</li>
+                      <li>Write clean, maintainable, documented code.</li>
+                      <li>Convert designs/wireframes to functional UI.</li>
+                      <li>Optimize speed, performance, scalability.</li>
+                      <li>Ensure cross-browser/device compatibility.</li>
+                      <li>Integrate APIs, databases, and third-party services.</li>
+                      <li>Maintain & improve existing sites; troubleshoot.</li>
+                      <li>Collaborate across design/content/backend.</li>
+                      <li>Stay current on modern web practices.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#web-qual">Qualifications & Skills</button>
+                </h2>
+                <div id="web-qual" class="accordion-collapse collapse" data-bs-parent="#acc-web">
+                  <div class="accordion-body">
+                    <ul class="mb-2">
+                      <li>Pro experience as a Web Developer.</li>
+                      <li>HTML, CSS, JavaScript proficiency.</li>
+                      <li>React/Angular/Vue experience.</li>
+                      <li>Backend (Node/PHP/Python, etc.).</li>
+                      <li>SQL/NoSQL (MySQL, MongoDB, PostgreSQL).</li>
+                      <li>Responsive/mobile-first understanding.</li>
+                      <li>Git/GitHub/GitLab.</li>
+                    </ul>
+                    <strong>Preferred:</strong> WordPress/Drupal; UI/UX familiarity; SEO; AWS/Azure/GCP; CI/CD; Docker/Kubernetes.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#web-offer">What We Offer</button>
+                </h2>
+                <div id="web-offer" class="accordion-collapse collapse" data-bs-parent="#acc-web">
+                  <div class="accordion-body">
+                    Hourly compensation, flexible arrangements, diverse projects, continuous learning, and a collaborative team culture.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <div id="emptyState" class="empty-state text-center py-5">
+        <h5 class="mb-2">No roles match your filters</h5>
+        <p class="mb-0">Try clearing filters or searching different keywords.</p>
+      </div>
+
+      <!-- General CTA -->
+      <div class="text-center mt-5">
+        <a href="apply.html" class="btn btn-thrive btn-lg px-4">Didn’t see your role? Apply anyway</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer note -->
+  <section class="py-4 border-top">
+    <div class="container small text-muted">
+      Thrive Remote is an equal opportunity employer. We celebrate diversity and are committed to an inclusive environment.
+    </div>
+  </section>
+
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Simple filter logic (title/keywords, dept, type)
+    const jobs = [...document.querySelectorAll('.job-card')];
+    const search = document.getElementById('search');
+    const department = document.getElementById('department');
+    const type = document.getElementById('type');
+    const clearBtn = document.getElementById('clear');
+    const emptyState = document.getElementById('emptyState');
+
+    function applyFilters() {
+      const q = (search.value || '').toLowerCase().trim();
+      const dep = department.value;
+      const t = type.value;
+
+      let shown = 0;
+
+      jobs.forEach(card => {
+        const title = card.dataset.title.toLowerCase();
+        const dept = card.dataset.dept;
+        const types = card.dataset.type.split(',');
+        const matchQ = !q || title.includes(q);
+        const matchDept = !dep || dept === dep;
+        const matchType = !t || types.includes(t);
+
+        const visible = matchQ && matchDept && matchType;
+        card.style.display = visible ? '' : 'none';
+        if (visible) shown++;
+      });
+
+      emptyState.style.display = shown ? 'none' : 'block';
+    }
+
+    [search, department, type].forEach(el => el.addEventListener('input', applyFilters));
+    clearBtn.addEventListener('click', () => {
+      search.value = '';
+      department.value = '';
+      type.value = '';
+      applyFilters();
+    });
+
+    // If coming from ?q= in URL, prefill search
+    const url = new URL(window.location.href);
+    const qParam = url.searchParams.get('q');
+    if (qParam) { search.value = qParam; applyFilters(); }
+  </script>
+</body>
+</html>
