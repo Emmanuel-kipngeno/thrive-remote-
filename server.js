@@ -44,6 +44,26 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+// ===== Jobs Storage =====
+const jobsFile = path.join(__dirname, "jobs.json");
+let jobs = {
+  "Virtual Assistant": { capacity: 1, applications: 0, active: true },
+  "Data Scientist": { capacity: 1, applications: 0, active: true },
+  "Web Developer": { capacity: 1, applications: 0, active: true },
+};
+
+if (fs.existsSync(jobsFile)) {
+  try {
+    jobs = JSON.parse(fs.readFileSync(jobsFile, "utf-8"));
+  } catch (err) {
+    console.error("Error reading jobs.json:", err);
+  }
+}
+
+function saveJobs() {
+  fs.writeFileSync(jobsFile, JSON.stringify(jobs, null, 2));
+}
+
 // ===== Routes =====
 
 // Home page
@@ -72,11 +92,24 @@ app.post("/send", (req, res) => {
     text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
   };
 
+  // Send to admin
   transporter.sendMail(mailOptions, (error) => {
     if (error) {
       console.error("Contact form error:", error);
       return res.status(500).json({ message: "Oops! Something went wrong and we couldn’t send your message." });
     }
+
+    // Auto-reply to sender
+    const autoReply = {
+      from: "admin@thrive-remote.com",
+      to: email,
+      subject: "We’ve received your message",
+      text: `Hi ${name},\n\nThank you for contacting Thrive Remote. We’ve received your message and will get back to you shortly.\n\nBest regards,\nThrive Remote Team`,
+    };
+    transporter.sendMail(autoReply, (err) => {
+      if (err) console.error("Auto-reply error:", err);
+    });
+
     res.json({ message: "✅ Thank you! Your message has been sent." });
   });
 });
@@ -89,6 +122,20 @@ app.post("/apply", upload.single("resume"), (req, res) => {
   if (!name || !email || !jobTitle || !message || !resume) {
     return res.status(400).json({ message: "Please complete all fields and upload your resume." });
   }
+
+  if (!jobs[jobTitle]) {
+    return res.status(400).json({ message: "Invalid job title." });
+  }
+
+  if (!jobs[jobTitle].active || jobs[jobTitle].applications >= jobs[jobTitle].capacity) {
+    return res.status(400).json({ message: `❌ The ${jobTitle} position is no longer accepting applications.` });
+  }
+
+  jobs[jobTitle].applications += 1;
+  if (jobs[jobTitle].applications >= jobs[jobTitle].capacity) {
+    jobs[jobTitle].active = false;
+  }
+  saveJobs();
 
   const mailOptions = {
     from: "admin@thrive-remote.com",
@@ -104,11 +151,24 @@ app.post("/apply", upload.single("resume"), (req, res) => {
     ],
   };
 
+  // Send to admin
   transporter.sendMail(mailOptions, (error) => {
     if (error) {
       console.error("Application error:", error);
       return res.status(500).json({ message: "Error sending application. Please try again later." });
     }
+
+    // Auto-reply to applicant
+    const autoReply = {
+      from: "admin@thrive-remote.com",
+      to: email,
+      subject: `Your Application for ${jobTitle}`,
+      text: `Hi ${name},\n\nThank you for applying for the ${jobTitle} position at Thrive Remote. We’ve received your application and our team will review it shortly.\n\nBest regards,\nThrive Remote Recruitment Team`,
+    };
+    transporter.sendMail(autoReply, (err) => {
+      if (err) console.error("Auto-reply error:", err);
+    });
+
     res.json({ message: "✅ Your application has been submitted successfully!" });
   });
 });

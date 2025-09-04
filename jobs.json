@@ -1,0 +1,17 @@
+{
+  "Virtual Assistant": {
+    "capacity": 5,
+    "applications": 0,
+    "active": true
+  },
+  "Data Scientist": {
+    "capacity": 3,
+    "applications": 1,
+    "active": true
+  },
+  "Web Developer": {
+    "capacity": 2,
+    "applications": 0,
+    "active": true
+  }
+}
