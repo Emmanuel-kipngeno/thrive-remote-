@@ -1,17 +1,17 @@
 {
   "Virtual Assistant": {
-    "capacity": 5,
-    "applications": 0,
+    "capacity": 15,
+    "applications": 2,
     "active": true
   },
   "Data Scientist": {
-    "capacity": 3,
-    "applications": 1,
-    "active": true
+    "capacity": 15,
+    "applications": 3,
+    "active": false
   },
   "Web Developer": {
-    "capacity": 2,
-    "applications": 0,
-    "active": true
+    "capacity": 15,
+    "applications": 2,
+    "active": false
   }
 }
