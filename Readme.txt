@@ -1,6 +1,5 @@
-# Thrive Remote
-
-Thrive Remote is a career and talent platform that connects professionals with remote job opportunities.  
+#Remote Nomads
+   Remote Nomads is a career and talent platform that connects professionals with remote job opportunities.  
 The platform provides a streamlined way for candidates to apply for roles and for the team to receive and manage applications.
 
 ## Features
