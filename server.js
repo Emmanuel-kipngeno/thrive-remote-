@@ -104,7 +104,7 @@ app.post("/send", (req, res) => {
       from: "admin@thrive-remote.com",
       to: email,
       subject: "We’ve received your message",
-      text: `Hi ${name},\n\nThank you for contacting Thrive Remote. We’ve received your message and will get back to you shortly.\n\nBest regards,\nThrive Remote Team`,
+      text: `Hi ${name},\n\nThank you for contacting Remote Nomads. We’ve received your message and will get back to you shortly.\n\nBest regards,\nRemote Nomads Team`,
     };
     transporter.sendMail(autoReply, (err) => {
       if (err) console.error("Auto-reply error:", err);
@@ -163,7 +163,7 @@ app.post("/apply", upload.single("resume"), (req, res) => {
       from: "admin@thrive-remote.com",
       to: email,
       subject: `Your Application for ${jobTitle}`,
-      text: `Hi ${name},\n\nThank you for applying for the ${jobTitle} position at Thrive Remote. We’ve received your application and our team will review it shortly.\n\nBest regards,\nThrive Remote Recruitment Team`,
+      text: `Hi ${name},\n\nThank you for applying for the ${jobTitle} position at Remote Nomads. We’ve received your application and our team will review it shortly.\n\nBest regards,\nRemote Nomads Recruitment Team`,
     };
     transporter.sendMail(autoReply, (err) => {
       if (err) console.error("Auto-reply error:", err);
