@@ -39,8 +39,8 @@ const transporter = nodemailer.createTransport({
   port: 587,
   secure: false,
   auth: {
-    user: "admin@thrive-remote.com",
-    pass: "jeJxf@Y9GtrSChN", // ⚠️ use env variable in production
+    user: "info@remote-nomads.com",
+    pass: "[SpfGb-T6Eva", // ⚠️ use env variable in production
   },
 });
 
@@ -85,8 +85,8 @@ app.post("/send", (req, res) => {
   }
 
   const mailOptions = {
-    from: "admin@thrive-remote.com",
-    to: "admin@thrive-remote.com",
+    from: "info@remote-nomads.com",
+    to: "info@remote-nomads.com",
     replyTo: email,
     subject: subject || "Contact Form Submission",
     text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
@@ -101,7 +101,7 @@ app.post("/send", (req, res) => {
 
     // Auto-reply to sender
     const autoReply = {
-      from: "admin@thrive-remote.com",
+      from: "info@remote-nomads.com",
       to: email,
       subject: "We’ve received your message",
       text: `Hi ${name},\n\nThank you for contacting Remote Nomads. We’ve received your message and will get back to you shortly.\n\nBest regards,\nRemote Nomads Team`,
@@ -138,8 +138,8 @@ app.post("/apply", upload.single("resume"), (req, res) => {
   saveJobs();
 
   const mailOptions = {
-    from: "admin@thrive-remote.com",
-    to: "admin@thrive-remote.com",
+    from: "info@remote-nomads.com",
+    to: "info@remote-nomads.com",
     replyTo: email,
     subject: `Job Application: ${jobTitle}`,
     text: `New job application received:\n\nName: ${name}\nEmail: ${email}\nJob Title: ${jobTitle}\n\nMessage:\n${message}`,
@@ -160,7 +160,7 @@ app.post("/apply", upload.single("resume"), (req, res) => {
 
     // Auto-reply to applicant
     const autoReply = {
-      from: "admin@thrive-remote.com",
+      from: "info@remote-nomads.com",
       to: email,
       subject: `Your Application for ${jobTitle}`,
       text: `Hi ${name},\n\nThank you for applying for the ${jobTitle} position at Remote Nomads. We’ve received your application and our team will review it shortly.\n\nBest regards,\nRemote Nomads Recruitment Team`,
